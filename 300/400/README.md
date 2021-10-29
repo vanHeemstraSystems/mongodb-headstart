@@ -1,7 +1,5 @@
 # 400 - React Router and Nginx
 
-# 400 - React Router and Nginx
-
 If you’re using [React Router](https://reacttraining.com/react-router/), then you’ll need to change the default Nginx config at build time:
 
 Add the following line 
