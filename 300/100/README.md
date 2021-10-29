@@ -121,7 +121,7 @@ You will be prompted as follows:
 found 27 vulnerabilities (8 moderate, 18 high, 1 critical)
   run `npm audit fix` to fix them, or `npm audit` for details
 
-Success! Created webui at /Users/willemvanheemstra/git/parcel-tracking-with-amqp-headstart/containers/app/webui
+Success! Created webui at /Users/willemvanheemstra/git/mongodb-headstart/containers/app/webui
 Inside that directory, you can run several commands:
 
   npm start
