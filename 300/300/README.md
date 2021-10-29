@@ -94,6 +94,6 @@ $ docker-compose --file docker-compose.prod.yml up --build -d
 
 If successful, browse to http://localhost (***note***: 80 is the default port for HTTP, and therefore not required to be added to the hostname) to see the production version of the app.
 
-![137897955-908a2483-66c2-4ab8-a22a-a8a06ca6b325](https://user-images.githubusercontent.com/12828104/138059887-319fd743-228e-4634-9d57-8e55e9c5e5ba.png)
+![137897955-908a2483-66c2-4ab8-a22a-a8a06ca6b325](https://user-images.githubusercontent.com/12828104/139402123-f774a895-d50f-4730-a741-d358a33cf954.png)
 
 http://localhost
