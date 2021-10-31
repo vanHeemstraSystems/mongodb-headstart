@@ -12,7 +12,7 @@ Not Applicable
 
 ## 300 - Generate a new app
 
-Inside the subdirectory /containers/app/ created a new app called '***mongodb***':
+Inside the subdirectory /containers/app/ create a new app called '***mongodb***':
 
 ```
 $ cd containers/app
