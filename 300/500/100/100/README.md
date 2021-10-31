@@ -2,7 +2,9 @@
 
 ## 100 - Install Create React App globally
 
-Not Applicable
+```
+$ npm install -g create-react-app@3.4.1
+```
 
 ## 200 - Setup the directory structure
 
