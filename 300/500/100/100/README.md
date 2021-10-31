@@ -94,16 +94,17 @@ yarn-error.log*
 ```
 containers/app/mongodb/.gitignore
 
-Inside the mongodb directory create a ***sample environment*** file.
+Inside the parent ```app``` directory update the previously created ***sample environment*** file.
 
 ```
 $ cd containers/app/mongodb
-$ touch sample.env
+$ vim sample.env
 ```
 
-With the ```sample.env``` file created, add the following content to it:
+With the ```sample.env``` file in edit mode, add the following content to it:
 
 ```
+...
 MONGO_INITDB_ROOT_USERNAME=mongo_root
 MONGO_INITDB_ROOT_PASSWORD=mongo_root()
 APP_USER=app_user
@@ -112,8 +113,9 @@ DB_NAME=<database_name>
 DB_COLLECTION_NAME=<db_collection_name>
 MONGO_HOSTNAME=mongodb
 MONGO_PORT=28017
+...
 ```
-containers/app/mongodb/sample.env
+containers/app/sample.env
 
 These are the values that Docker will use to configure the server running in a Docker container. This example uses the following:
 
@@ -126,7 +128,7 @@ These are the values that Docker will use to configure the server running in a D
 Copy the ```sample.env``` file:
 
 ```
-$ cd containers/app/mongodb
+$ cd containers/app
 $ cp sample.env .env
 ```
 
