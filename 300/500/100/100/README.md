@@ -91,7 +91,7 @@ yarn-error.log*
 
 /nginx/nginx.conf
 ```
-containers/app/webui/.gitignore
+containers/app/mongodb/.gitignore
 
 
 
