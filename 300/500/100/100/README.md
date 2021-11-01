@@ -13,6 +13,19 @@ $ cd containers/app
 $ mkdir mongodb
 ```
 
+Inside the newly created subdirectory ```amqp``` run the following command to initialise npm:
+
+```
+$ cd containers/app/mongodb
+$ npm init -y
+```
+
+As a result of above initialization, the following files will have been created in the ```mongodb``` subdirectory:
+
+- package.json
+
+MORE TO FOLOW ??
+
 Create a file ```app.ts``` inside the ```mongodb``` directory.
 
 ```
