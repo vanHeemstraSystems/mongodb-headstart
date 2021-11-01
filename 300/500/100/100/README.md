@@ -24,7 +24,17 @@ As a result of above initialization, the following files will have been created 
 
 - package.json
 
-MORE TO FOLOW ??
+
+
+
+
+
+
+
+
+
+
+MORE TO FOLLOW ??
 
 Create a file ```app.ts``` inside the ```mongodb``` directory.
 
