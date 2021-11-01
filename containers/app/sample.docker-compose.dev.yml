@@ -22,3 +22,22 @@ services:
       - /app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
+      
+  mongodb:
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile.dev
+      args: # from env_file
+        IMAGE_REPOSITORY: ${IMAGE_REPOSITORY}
+        PROXY_USER: ${PROXY_USER}
+        PROXY_PASSWORD: ${PROXY_PASSWORD}
+        PROXY_FQDN: ${PROXY_FQDN}
+        PROXY_PORT: ${PROXY_PORT}
+    env_file:
+      - .env
+    container_name: mongodb-dev      
+    ports:
+      - "28017:27017"
+    volumes:
+      - ./mongodb:/app
+      - /app/node_modules      
