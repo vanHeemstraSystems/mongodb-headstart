@@ -150,7 +150,7 @@ $ sudo npm install nodemon -g
 $ npm install @babel/node -g
 ```
 
-If it is nmentioned that there is already a process listening at port 8000, find the Process ID (PID) as follows:
+If it is mentioned that there is already a process listening at port 8000, find the Process ID (PID) as follows:
 
 You can try netstat
 ```
