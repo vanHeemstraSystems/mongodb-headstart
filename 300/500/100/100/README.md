@@ -24,12 +24,145 @@ As a result of above initialization, the following files will have been created 
 
 - package.json
 
+Add a script entry inside ```package.json``` as follows:
+
+```
+...
+  "scripts": {
+    "start": "nodemon ./server.js --exec babel-node -e js"
+  }
+...
+```
+containers/app/mongodb/package.json
+
+Create a file called ```server.js``` in the ```mongodb``` directory:
+
+```
+$ cd containers/app/mongodb
+$ touch server.js
+```
+
+Add the following content to ```server.js```:
+
+```
+import express from "express"              
+const app = express()              
+app.use("/", (req, res) => {                
+  res.send("Welcome to MongoDB Service")              
+})      
+app.listen(8000, () => console.log(`Server listening on 8000`))
+```
+containers/app/mongodb/server.js
+
+Add npm packages by the following command:
+
+```
+$ cd containers/app/mongodb
+$ npm i --save express dotenv tortoise mongoose socket.io nodemon
+```
+
+After above command, verify if the packages have been mentioned inside ```package.json```:
+
+```
+...
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.11",
+    "nodemon": "^2.0.14",    
+    "socket.io": "^4.3.1",
+    "tortoise": "^1.0.1"
+  }
+...
+```
+containers/app/mongodb/package.json
+
+Add npm packages used for development only by the following command:
+
+```
+$ cd containers/app/mongodb
+$ npm i --save-dev @babel/core @babel/preset-env @babel/node @babel/cli babel-loader
+```
+
+After above command, verify if the packages have been mentioned inside ```package.json```:
+
+```
+...
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",  
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.8",    
+    "@babel/preset-env": "^7.15.8",
+    "babel-loader": "^8.2.3"
+  }
+...
+```
+
+Create a file called ```.babelrc``` in the ```mongodb``` directory.
+
+```
+$ cd containers/app/mongodb
+$ touch .babelrc
+```
+
+Add the following content to this ```.babelrc``` file:
+
+```
+{
+  "presets": ["@babel/preset-env"]
+}
+```
+containers/app/mongodb/.babelrc
+
+Test which version of babel you are running with commmand:
+
+```
+$ babel -V
+```
+
+If babel is not recognized or it is not verion 7 or higher
+
+```
+$ npm uninstall babel-cli -g
+$ npm uninstall babel-core -g
+```
+
+And
+
+```
+$ npm install @babel/cli -g
+$ npm install @babel/core -g
+```
+
+As an early trial, try to run the server.js file as to start a server with this command from within the mongodb directory:
+
+```
+$ cd containers/app/mongodb
+$ nodemon ./server --exec babel-node -e js
+```
+
+**Note**: If you see ```command not found: nodemon``` you have to install nodeman first, globally, as follows:
+
+```
+$ sudo npm install nodemon -g
+```
+
+**Note**: If you see command not found: babel-node you have to install babel-node first, globally, as follows:
+
+```
+$ npm install @babel/node -g
+```
+
+After above execution open ```localhost:8000``` in a browser. If the "Welcome to MongoDB Service" message comes up on the page it means Express.js installation was successful.
+
+SCREENSHOT GOES HERE
+
+Let's continue.
 
 
 
 
-
-
+====== DISREGARD BELOW FOR NOW ==========
 
 
 
