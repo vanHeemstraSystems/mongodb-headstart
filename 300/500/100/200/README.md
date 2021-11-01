@@ -24,24 +24,24 @@ ENV HTTP_PROXY="http://${PROXY_USER}:${PROXY_PASSWORD}@${PROXY_FQDN}:${PROXY_POR
 ENV HTTPS_PROXY="http://${PROXY_USER}:${PROXY_PASSWORD}@${PROXY_FQDN}:${PROXY_PORT}"
 
 # set working directory
-WORKDIR /app
+# WAS: WORKDIR /app
 
 # add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# WAS: ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --silent
+# WAS: COPY package.json ./
+# WAS: COPY package-lock.json ./
+# WAS: RUN npm install --silent
 
 # add app
-COPY . ./
+# WAS: COPY . ./
 
 # expose port
-EXPOSE 8000
+EXPOSE 28017
 
 # start app
-CMD ["npm", "start"]
+# WAS: CMD ["npm", "start"]
 ```
 containers/app/mongodb/Dockerfile.dev
 
