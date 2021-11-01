@@ -110,7 +110,7 @@ service:
       - .env
     container_name: mongodb-dev      
     ports:
-      - "8000:8000"
+      - "28017:27017"
     volumes:
       - ./mongodb:/app
       - /app/node_modules       
