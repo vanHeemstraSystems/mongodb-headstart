@@ -177,7 +177,7 @@ $ kill -9 <PID>
 
 After above execution open ```localhost:8000``` in a browser. If the "Welcome to MongoDB Service" message comes up on the page it means Express.js installation was successful.
 
-SCREENSHOT GOES HERE
+![Screenshot 2021-11-01 at 11 14 46](https://user-images.githubusercontent.com/1499433/139656576-3039dbce-aa4d-4dc9-b4aa-c6d195be407e.png)
 
 Let's continue.
 
