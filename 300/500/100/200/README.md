@@ -73,4 +73,75 @@ containers/app/mongodb/Dockerfile.dev
 ```
 containers/app/mongodb/Dockerfile.dev
 
+Create a file called ```.dockerignore``` inside the ```mongodb``` directory.
 
+```
+$ cd containers/app/mongodb
+$ touch .dockerignore 
+```
+
+Add the following content to ```.dockerignore```:
+
+```
+node_modules
+.dockerignore
+Dockerfile.dev
+Dockerfile.prod
+```
+containers/app/mongodb/.dockerignore
+
+Now let us add the ```mongodb``` service to ```sample.docker-compose.dev.yml``` by this entry:
+
+```
+...
+service:
+...
+  mongodb:
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile.dev
+      args: # from env_file
+        IMAGE_REPOSITORY: ${IMAGE_REPOSITORY}
+        PROXY_USER: ${PROXY_USER}
+        PROXY_PASSWORD: ${PROXY_PASSWORD}
+        PROXY_FQDN: ${PROXY_FQDN}
+        PROXY_PORT: ${PROXY_PORT}
+    env_file:
+      - .env
+    container_name: mongodb-dev      
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./mongodb:/app
+      - /app/node_modules       
+...
+
+```
+containers/app/sample.docker-compose.dev.yml
+
+Now it is time to build the development Docker Image and run the development Docker Container for our app, now including the ```mongodb``` service.
+
+```
+$ cd containers/app
+$ docker-compose --file docker-compose.dev.yml up --build -d
+```
+
+Fingers crossed ... !
+
+If successful, you can browse to the start page of the new React App, which will look like below:
+
+SCREENSHOT HERE
+
+http://localhost:8080
+
+Now check if we can also see the ```mongodb``` server at http://localhost:8000
+
+SCREENSHOT HERE
+
+http://localhost:8000
+
+Bring down the container before moving on:
+
+```
+$ docker-compose --file docker-compose.dev.yml stop
+```
