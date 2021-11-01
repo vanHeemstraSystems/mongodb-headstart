@@ -152,7 +152,7 @@ $ npm install @babel/node -g
 
 If it is mentioned that there is already a process listening at port 8000, find the Process ID (PID) as follows:
 
-You can try netstat
+In **general**, you can try netstat
 ```
 $ netstat -vanp tcp | grep 8000
 ``` 
