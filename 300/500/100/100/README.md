@@ -58,7 +58,6 @@ Add npm packages by the following command:
 
 ```
 $ cd containers/app/mongodb
-$ # WAS npm i --save express dotenv tortoise mongoose socket.io nodemon
 $ npm i --save express dotenv nodemon
 ```
 
@@ -69,10 +68,7 @@ After above command, verify if the packages have been mentioned inside ```packag
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    # WAS "mongoose": "^6.0.11",
-    "nodemon": "^2.0.14",    
-    # WAS "socket.io": "^4.3.1",
-    # WAS "tortoise": "^1.0.1"
+    "nodemon": "^2.0.14"
   }
 ...
 ```
@@ -152,6 +148,31 @@ $ sudo npm install nodemon -g
 
 ```
 $ npm install @babel/node -g
+```
+
+If it is nmentioned that there is already a process listening at port 8000, find the Process ID (PID) as follows:
+
+You can try netstat
+```
+$ netstat -vanp tcp | grep 8000
+``` 
+
+For **macOS El Capitan and newer** (or if your netstat doesn't support -p), use lsof
+
+```
+$ lsof -i tcp:8000 
+``` 
+ 
+For **Centos 7** use:
+
+```
+$ netstat -vanp --tcp | grep 8000
+```
+
+If it returns the Process ID (PID) at which an earlier process is listening, you can kill that process as follows:
+
+```
+$ kill -9 <PID>
 ```
 
 After above execution open ```localhost:8000``` in a browser. If the "Welcome to MongoDB Service" message comes up on the page it means Express.js installation was successful.
