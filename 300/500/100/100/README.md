@@ -13,7 +13,7 @@ $ cd containers/app
 $ mkdir mongodb
 ```
 
-Inside the newly created subdirectory ```amqp``` run the following command to initialise npm:
+Inside the newly created subdirectory ```mongodb``` run the following command to initialise npm:
 
 ```
 $ cd containers/app/mongodb
