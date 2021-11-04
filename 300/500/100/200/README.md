@@ -90,7 +90,7 @@ Dockerfile.prod
 ```
 containers/app/mongodb/.dockerignore
 
-Now let us add the ```mongodb``` service to ```sample.docker-compose.dev.yml``` by this entry:
+Now let us add the ```mongodb``` service and the respective ```mongodb-dev-data``` volume to ```sample.docker-compose.dev.yml``` by this entry:
 
 ```
 ...
@@ -113,17 +113,27 @@ service:
       - "28017:27017"
     volumes:
       - ./mongodb:/app
-      - /app/node_modules       
+      - /app/node_modules
+      - mongodb-dev-data:/data/db
+...      
+volumes:
+  mongodb-dev-data:
 ...
 
 ```
 containers/app/sample.docker-compose.dev.yml
 
-Now it is time to build the development Docker Image and run the development Docker Container for our app, now including the ```mongodb``` service.
+Now it is time to build the development Docker Image, and run the container specifying its name as "mongodb-dev" to distinguish it from possible other stacks that are called "app" (the default name, based on the root directory), now including the ```mongodb``` service.
 
 ```
 $ cd containers/app
-$ docker-compose --file docker-compose.dev.yml up --build -d
+$ docker-compose --file docker-compose.dev.yml up --project-name mongodb-dev --build -d
+```
+
+**Note**:   
+```
+-p, --project-name NAME     Specify an alternate project name
+                              (default: directory name)
 ```
 
 Fingers crossed ... !
