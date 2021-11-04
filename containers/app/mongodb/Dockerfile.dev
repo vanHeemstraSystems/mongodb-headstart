@@ -40,7 +40,7 @@ ENV MONGO_HOSTNAME=${MONGO_HOSTNAME}
 # COPY . ./
 
 # expose port
-EXPOSE 28017
+EXPOSE 28016
 
 # start app
 # CMD ["npm", "start"]
