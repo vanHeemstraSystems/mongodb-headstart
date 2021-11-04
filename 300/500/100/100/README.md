@@ -181,6 +181,141 @@ After above execution open ```localhost:8000``` in a browser. If the "Welcome to
 
 Let's continue.
 
+Create a subdirectory under ```mongodb``` called ```scripts```:
+
+```
+$ cd containers/app/mongodb
+$ mkdir scripts
+```
+
+Create a subdirectory under ```scripts``` called ```init```:
+
+```
+$ cd containers/app/mongodb/scripts
+$ mkdir init
+```
+
+Inside the ```init``` directory, create a file called ```.dbshell``` with no content inside.
+
+```
+$ cd containers/app/mongodb/scripts/init
+$ touch .dbshell
+```
+
+Also, inside the ```init``` directory, create a file called ```sample.mongoInit.js``` with no content inside.
+
+```
+$ cd containers/app/mongodb/scripts/init
+$ touch sample.mongoInit.js
+```
+
+Add the following content to ```sample.mongoInit.js```:
+
+```
+// use shell command to save env variable to a temporary file, then return the contents.
+// source: https://stackoverflow.com/questions/39444467/how-to-pass-environment-variable-to-mongo-script/60192758#60192758
+function getEnvVariable(envVar, defaultValue) {
+    var command = run("sh", "-c", `printenv --null ${ envVar } >/tmp/${ envVar }.txt`);
+    // note: 'printenv --null' prevents adding line break to value
+    if (command != 0) return defaultValue;
+    return cat(`/tmp/${ envVar }.txt`)
+  }
+  
+  // create application user and collection
+  var dbUser = getEnvVariable('APP_USER', 'app_user');
+  var dbPwd = getEnvVariable('APP_PWD', 'app_user()');
+  var dbName = getEnvVariable('DB_NAME', '<database_name>');
+  var dbCollectionName = getEnvVariable('DB_COLLECTION_NAME', '<db_collection_name>');
+  db = db.getSiblingDB(dbName);
+  db.createUser({
+    'user': dbUser,
+    'pwd': dbPwd,
+    'roles': [
+      {
+        'role': 'dbOwner',
+        'db': getEnvVariable('DB_NAME', '<database_name>')
+      }
+    ]
+  });
+  
+  db.createCollection(dbCollectionName);
+```
+containers/app/mongodb/scripts/init/sample.mongoInit.js
+
+Copy sample.mongoInit.js to mongoInit.js:
+
+```
+$ cd containers/app/mongodb/scripts/init
+$ cp sample.mongoInit.js mongoInit.js
+```
+
+Now inside ```mongoInit.js``` replace the following placeholders:
+
+- <database_name> : replace with your database name (e.g. ```parceltracking```)
+- <db_collection_name> : replace with your database name (e.g. ```tracking```)
+
+Create a subdirectory under ```scripts``` called ```seed```:
+
+```
+$ cd containers/app/mongodb/scripts
+$ mkdir seed
+```
+
+Inside the ```seed``` directory, create a file called ```sample.MOCK_DATA.json```.
+
+```
+$ cd containers/app/mongodb/scripts/seed
+$ touch sample.MOCK_DATA.json
+```
+
+Add the following content to ```sample.MOCK_DATA.json```:
+
+```
+sample.MOCK_DATA.json
+```
+containers/app/mongodb/scripts/seed/sample.MOCK_DATA.json
+
+Copy sample.MOCK_DATA.json to MOCK_DATA.json:
+
+```
+$ cd containers/app/mongodb/scripts/seed
+$ cp sample.MOCK_DATA.json MOCK_DATA.json
+```
+
+Now inside ```MOCK_DATA.json``` replace the content with the mock data that suits your database.
+
+Also, inside the ```seed``` directory, create a file called ```mongo_seed.sh```.
+
+```
+$ cd containers/app/mongodb/scripts/seed
+$ touch mongo_seed.sh
+```
+
+Add the following content to ```mongo_seed.sh```:
+
+```
+#!/bin/bash
+if [ -f "/MOCK_DATA.json" ]; then
+  FILE="/MOCK_DATA.json"
+elif [ -f "./MOCK_DATA.json" ]; then
+  FILE="./MOCK_DATA.json"
+else
+  echo "Mock data file not found. Make sure container has a MOCK_DATA.json file for this script to work"
+  exit 1
+fi
+
+mongoimport --host $MONGO_HOSTNAME \
+  --authenticationDatabase $DB_NAME \
+  --username $APP_USER --password $APP_PWD \
+  --db $DB_NAME \
+  --collection $DB_COLLECTION_NAME \
+  --file $FILE --jsonArray
+```
+containers/app/mongodb/scripts/seed/mongo_seed.sh
+
+
+
+== WE ARE HERE ==
 
 
 
