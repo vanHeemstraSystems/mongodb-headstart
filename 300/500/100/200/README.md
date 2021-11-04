@@ -52,7 +52,7 @@ ENV MONGO_HOSTNAME=${MONGO_HOSTNAME}
 # WAS: COPY . ./
 
 # expose port
-EXPOSE 28017
+EXPOSE 28016
 
 # start app
 # WAS: CMD ["npm", "start"]
@@ -110,7 +110,7 @@ service:
       - .env
     container_name: mongodb-dev      
     ports:
-      - "28017:27017"
+      - "28016:27017"
     volumes:
       - ./mongodb:/app
       - /app/node_modules
