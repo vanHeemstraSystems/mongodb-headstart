@@ -40,4 +40,8 @@ services:
       - "28017:27017"
     volumes:
       - ./mongodb:/app
-      - /app/node_modules      
+      - /app/node_modules
+      - mongodb-dev-data:/data/db
+  
+volumes:
+  mongodb-dev-data:  
