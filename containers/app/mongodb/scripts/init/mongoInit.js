@@ -10,8 +10,8 @@ function getEnvVariable(envVar, defaultValue) {
   // create application user and collection
   var dbUser = getEnvVariable('APP_USER', 'app_user');
   var dbPwd = getEnvVariable('APP_PWD', 'app_user()');
-  var dbName = getEnvVariable('DB_NAME', 'MeanUrls');
-  var dbCollectionName = getEnvVariable('DB_COLLECTION_NAME', 'Urls');
+  var dbName = getEnvVariable('DB_NAME', '<database_name>');
+  var dbCollectionName = getEnvVariable('DB_COLLECTION_NAME', '<db_collection_name>');
   db = db.getSiblingDB(dbName);
   db.createUser({
     'user': dbUser,
@@ -19,7 +19,7 @@ function getEnvVariable(envVar, defaultValue) {
     'roles': [
       {
         'role': 'dbOwner',
-        'db': getEnvVariable('DB_NAME', 'MeanUrls')
+        'db': getEnvVariable('DB_NAME', '<database_name>')
       }
     ]
   });
