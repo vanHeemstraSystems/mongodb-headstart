@@ -90,6 +90,13 @@ Dockerfile.prod
 ```
 containers/app/mongodb/.dockerignore
 
+Copy sample files:
+
+```
+$ cd containers/app/mongodb
+$ cp sample.env .env
+```
+
 Now let us add the ```mongodb``` service and the respective ```mongodb-dev-data``` volume to ```sample.docker-compose.dev.yml``` by this entry:
 
 ```

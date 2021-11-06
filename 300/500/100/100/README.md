@@ -35,6 +35,34 @@ Add a script entry inside ```package.json``` as follows:
 ```
 containers/app/mongodb/package.json
 
+Inside the mongodb directory create a ***sample environment*** file.
+
+```
+$ cd containers/app/mongodb
+$ touch sample.env
+```
+
+With the sample.env file created, add the following content to it:
+
+```
+PORT=8000
+```
+containers/app/mongodb/sample.env
+
+Inside the mongodb directory create a ***.gitignore*** file.
+
+```
+$ cd containers/app/mongodb
+$ touch .gitignore
+```
+
+With the .gitignore file created, add the following content to it:
+
+```
+.env
+```
+containers/app/mongodb/.gitignore
+
 Create a file called ```server.js``` in the ```mongodb``` directory:
 
 ```
