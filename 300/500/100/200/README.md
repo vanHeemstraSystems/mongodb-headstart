@@ -137,7 +137,7 @@ Now it is time to build the development Docker Image, and run the container spec
 
 ```
 $ cd containers/app
-$ docker-compose --file docker-compose.dev.yml up --project-name mongodb-dev --build -d
+$ docker-compose --file docker-compose.dev.yml --project-name mongodb-dev up --build -d
 ```
 
 **Note**:   
