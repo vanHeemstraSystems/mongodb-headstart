@@ -41,6 +41,9 @@ services:
     volumes:
       - ./mongodb:/app
       - /app/node_modules
+      - ./mongodb/scripts/init/:/docker-entrypoint-initdb.d
+      - ./mongodb/scripts/init:/home/mongodb
+      - ./mongodb/scripts/seed/:/home/mongodb/seed      
       - mongodb-dev-data:/data/db
   
 volumes:
