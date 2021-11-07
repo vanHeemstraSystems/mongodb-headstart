@@ -120,7 +120,10 @@ service:
       - "28016:27017"
     volumes:
       - ./mongodb:/app
-      - /app/node_modules
+      - ./mongodb/scripts/init/:/docker-entrypoint-initdb.d
+      - ./mongodb/scripts/init:/home/mongodb
+      - ./mongodb/scripts/seed/:/home/mongodb/seed
+      - /app/node_modules      
       - mongodb-dev-data:/data/db
 ...      
 volumes:
