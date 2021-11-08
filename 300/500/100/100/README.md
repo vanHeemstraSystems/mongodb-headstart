@@ -60,6 +60,8 @@ With the .gitignore file created, add the following content to it:
 
 ```
 .env
+scripts/init/mongoInit.js
+scripts/seed/MOCK_DATA.json
 ```
 containers/app/mongodb/.gitignore
 
@@ -341,47 +343,6 @@ mongoimport --host $MONGO_HOSTNAME \
 ```
 containers/app/mongodb/scripts/seed/mongo_seed.sh
 
-
-
-== WE ARE HERE ==
-
-
-
-====== DISREGARD BELOW FOR NOW ==========
-
-
-
-
-MORE TO FOLLOW ??
-
-Create a file ```app.ts``` inside the ```mongodb``` directory.
-
-```
-$ cd containers/app/mongodb
-$ touch app.ts
-```
-
-Add the following content to ```app.ts```:
-
-```
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import { Express } from 'express';
-import { routerIndex } from './routes/index';
-
-export default function createApp(): Express {
-    const app = express();
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use('/api', routerIndex());
-    app.use((req, res) => res.status(404).send('not found :('));
-    return app;
-}
-```
-containers/app/mongodb/app.ts
-
-== WE ARE HERE == 
-
 ## 300 - Generate a new app
 
 Inside the parent ```app``` directory update the previously created ***sample environment*** file.
@@ -428,8 +389,3 @@ Replace ```<database_name>``` and ```<db_collection_name>``` in ```.env``` file 
 DB_NAME=parceltracking
 DB_COLLECTION_NAME=tracking
 ```
-
-
-
-
-== WE ARE HERE ==

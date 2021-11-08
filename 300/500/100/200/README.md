@@ -113,6 +113,14 @@ service:
         PROXY_PASSWORD: ${PROXY_PASSWORD}
         PROXY_FQDN: ${PROXY_FQDN}
         PROXY_PORT: ${PROXY_PORT}
+        MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+        APP_USER: ${APP_USER}
+        APP_PWD: ${APP_PWD}
+        DB_NAME: ${DB_NAME}
+        DB_COLLECTION_NAME: ${DB_COLLECTION_NAME}
+        MONGO_HOSTNAME: ${MONGO_HOSTNAME}
+        MONGO_PORT: 28016        
     env_file:
       - .env
     container_name: mongodb-dev      
@@ -121,7 +129,7 @@ service:
     volumes:
       - ./mongodb:/app
       - ./mongodb/scripts/init/:/docker-entrypoint-initdb.d
-      - ./mongodb/scripts/init:/home/mongodb
+      - ./mongodb/scripts/init:/home/mongodb  # chown -R $USER ./mongodb/scripts/init
       - ./mongodb/scripts/seed/:/home/mongodb/seed
       - /app/node_modules      
       - mongodb-dev-data:/data/db
@@ -132,6 +140,37 @@ volumes:
 
 ```
 containers/app/sample.docker-compose.dev.yml
+
+Change the permission of the folder ```containers/app/mongodb/scripts/init``` to match the one used in the Dockerfile (here: $USER).
+
+```
+$ chown -R $USER containers/app/mongodb/scripts/init
+```
+
+Here’s a walkthrough of what the yaml file is doing:
+
+- ```version: "3.7"``` is the version of Docker Compose we're using, the latest as I write this.
+- We’ve named the service ```mongodb```. This will become the host name of the MongoDB server and must match ```MONGO_HOSTNAME``` in the ```.env``` file.
+- We’ll build a container from the official MongoDB image: image: ```mongo:latest```. See ```Dockerfile.dev``` & ```Dockerfile.prod```.
+- In the ```volumes``` list there are a few things going on: 
+> - First, note that for each item, the syntax is such that the value to the left of the colon (```:```), pertains to the host machine, while to the right belongs to the container (```./host-directory:/container-directory```). 
+> - We're mounting ```./scripts/init``` to the directory on the container called ```/docker-entrypoint-initdb.d```. As mentioned earlier, this is a special directory that runs any Javascript or Bash scripts inside of it when the container is first created. 
+> - We'll also mount ```init``` to ```/home/mongodb``` on the container. This creates the Linux user that can run the scripts with the Mongo shell. 
+> - The ```seed``` scripts will be copied over to ```/home/mongodb/seed```. That way they're available to seed the database when the container is running if we want. 
+> - The last item - ```mongodb-dev-data:/data/db``` will bind the Mongo database files as a Docker volume. This allows data to persist when the container is stopped and restarted. It lets us easily wipe out all of the Mongo data and start over when necessary.
+- Moving on, in ```ports```, we're connecting our local ```28016``` port (dev) or ```28017``` port (prod) to the conventional Mongo port ```27017``` on the container.
+- The ```environment``` list will set all of the environment variables from ```.env``` in the container.
+- Lastly, ```volumes: mongodb-dev-data``` or ```volumes: mongodb-prod-data```creates and names the Docker volume on the host machine and must match the last item of the volumes list set when defining the ```mongodb``` service.
+
+Before running docker-compose, make sure when on a Linux RHEL server, set enforcing to permissive, like so:
+
+```
+$ getenforce
+$ Enforcing
+$ sudo setenforce 0
+$ getenforce
+$ Permissive
+```
 
 Now it is time to build the development Docker Image, and run the container specifying its name as "mongodb-dev" to distinguish it from possible other stacks that are called "app" (the default name, based on the root directory), now including the ```mongodb``` service.
 
