@@ -14,7 +14,9 @@ services:
         PROXY_PORT: ${PROXY_PORT}
     env_file:
       - .env
-    container_name: webui-dev      
+    container_name: webui-dev
+    security_opt:
+      - no-new-privileges:true    
     ports:
       - "8080:3000"
     volumes:
