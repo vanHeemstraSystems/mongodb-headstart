@@ -36,7 +36,7 @@ services:
     volumes:
       - ./mongodb:/app
       - ./mongodb/scripts/init/:/docker-entrypoint-initdb.d
-      - ./mongodb/scripts/init:/home/mongodb # chown -R 999:999 ./mongodb/scripts/init
+      - ./mongodb/scripts/init:/home/mongodb # chown -R $USER ./mongodb/scripts/init
       - ./mongodb/scripts/seed/:/home/mongodb/seed      
       - /app/node_modules
       - mongodb-prod-data:/data/db
@@ -46,10 +46,10 @@ volumes:
 ```
 containers/app/sample.docker-compose.prod.yml
 
-Change the permission of the folder ```containers/app/mongodb/scripts/init``` to match the one used in the Dockerfile (here: 999).
+Change the permission of the folder ```containers/app/mongodb/scripts/init``` to match the one used in the Dockerfile (here: $USER).
 
 ```
-$ chown -R 999:999 containers/app/mongodb/scripts/init
+$ chown -R $USER containers/app/mongodb/scripts/init
 ```
 
 Copy the sample.docker-compose.prod.yml:
