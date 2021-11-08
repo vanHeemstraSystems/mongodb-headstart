@@ -113,6 +113,14 @@ service:
         PROXY_PASSWORD: ${PROXY_PASSWORD}
         PROXY_FQDN: ${PROXY_FQDN}
         PROXY_PORT: ${PROXY_PORT}
+        MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+        APP_USER: ${APP_USER}
+        APP_PWD: ${APP_PWD}
+        DB_NAME: ${DB_NAME}
+        DB_COLLECTION_NAME: ${DB_COLLECTION_NAME}
+        MONGO_HOSTNAME: ${MONGO_HOSTNAME}
+        MONGO_PORT: 28016        
     env_file:
       - .env
     container_name: mongodb-dev      
