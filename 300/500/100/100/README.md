@@ -60,6 +60,8 @@ With the .gitignore file created, add the following content to it:
 
 ```
 .env
+scripts/init/mongoInit.js
+scripts/seed/MOCK_DATA.json
 ```
 containers/app/mongodb/.gitignore
 
