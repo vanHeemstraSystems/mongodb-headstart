@@ -105,6 +105,12 @@ $ cd containers/app
 $ docker-compose --file docker-compose.prod.yml --project-name mongodb-prod up --build -d
 ```
 
+**Note**:   
+```
+-p, --project-name NAME     Specify an alternate project name
+                              (default: directory name)
+``` 
+
 If successful, browse to http://localhost (***note***: 80 is the default port for HTTP, and therefore not required to be added to the hostname) to see the production version of the app.
 
 ![React App Screen Shot](react_app_screen_shot.png)
