@@ -141,6 +141,16 @@ volumes:
 ```
 containers/app/sample.docker-compose.dev.yml
 
+Before running docker-compose, make sure when on a Linux RHEL server, set enforcing to permissive, like so:
+
+```
+$ getenforce
+$ Enforcing
+$ sudo setenforce 0
+$ getenforce
+$ Permissive
+```
+
 Now it is time to build the development Docker Image, and run the container specifying its name as "mongodb-dev" to distinguish it from possible other stacks that are called "app" (the default name, based on the root directory), now including the ```mongodb``` service.
 
 ```
