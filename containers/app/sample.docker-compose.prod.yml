@@ -1,0 +1,53 @@
+version: "3.7"
+
+# See https://stackoverflow.com/questions/29261811/use-docker-compose-env-variable-in-dockerbuild-file
+services:
+  webui:
+    build:
+      context: ./webui
+      dockerfile: Dockerfile.prod
+      args: # from env_file
+        IMAGE_REPOSITORY: ${IMAGE_REPOSITORY}
+        PROXY_USER: ${PROXY_USER}
+        PROXY_PASSWORD: ${PROXY_PASSWORD}
+        PROXY_FQDN: ${PROXY_FQDN}
+        PROXY_PORT: ${PROXY_PORT}
+    env_file:
+      - .env
+    container_name: webui-prod  
+    ports:
+      - "80:80"
+
+  mongodb:
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile.prod
+      args: # from env_file
+        IMAGE_REPOSITORY: ${IMAGE_REPOSITORY}
+        PROXY_USER: ${PROXY_USER}
+        PROXY_PASSWORD: ${PROXY_PASSWORD}
+        PROXY_FQDN: ${PROXY_FQDN}
+        PROXY_PORT: ${PROXY_PORT}
+        MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+        APP_USER: ${APP_USER}
+        APP_PWD: ${APP_PWD}
+        DB_NAME: ${DB_NAME}
+        DB_COLLECTION_NAME: ${DB_COLLECTION_NAME}
+        MONGO_HOSTNAME: ${MONGO_HOSTNAME}
+        MONGO_PORT: 28017        
+    env_file:
+      - .env
+    container_name: mongodb-prod      
+    ports:
+      - "28017:27017"
+    volumes:
+      - ./mongodb:/app
+      - ./mongodb/scripts/init/:/docker-entrypoint-initdb.d
+      - ./mongodb/scripts/init/:/home/mongodb
+      - ./mongodb/scripts/seed/:/home/mongodb/seed      
+      - /app/node_modules
+      - mongodb-prod-data:/data/db
+
+volumes:
+  mongodb-prod-data:
