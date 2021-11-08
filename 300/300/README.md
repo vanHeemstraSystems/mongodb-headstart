@@ -19,7 +19,9 @@ services:
         PROXY_PORT: ${PROXY_PORT}
     env_file:
       - .env      
-    container_name: webui-prod  
+    container_name: webui-prod
+    security_opt:
+      - no-new-privileges:true    
     ports:
       - "80:80"
 ```
