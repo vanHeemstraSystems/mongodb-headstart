@@ -141,7 +141,7 @@ volumes:
 ```
 containers/app/sample.docker-compose.dev.yml
 
-Change the permission of the folder ```containers/app/mongodb/scripts/init``` to match the one used in the Dockerfile (here: $USER).
+Change the permission of the folder ```containers/app/mongodb/scripts/init``` to match the one used in the Dockerfile (here: $USER). See https://github.com/docker-library/mongo/issues/323
 
 ```
 $ chown -R $USER containers/app/mongodb/scripts/init
