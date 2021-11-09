@@ -286,6 +286,8 @@ Now inside ```mongoInit.js``` replace the following placeholders:
 - <database_name> : replace with your database name (e.g. ```parceltracking```)
 - <db_collection_name> : replace with your database name (e.g. ```tracking```)
 
+```mongoInit.js``` is where we'll create our user and database.
+
 Create a subdirectory under ```scripts``` called ```seed```:
 
 ```
