@@ -232,7 +232,9 @@ $ cd containers/app/mongodb/scripts/init
 $ touch .dbshell
 ```
 
-Also, inside the ```init``` directory, create a file called ```sample.mongoInit.js``` with no content inside.
+The ```.dbshell``` file is just a blank placeholder file that is used to create a Linux user to run the scripts in the container.
+
+Also, inside the ```init``` directory, create a file called ```sample.mongoInit.js```.
 
 ```
 $ cd containers/app/mongodb/scripts/init
