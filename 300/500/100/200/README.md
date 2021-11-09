@@ -199,6 +199,21 @@ SCREENSHOT HERE
 
 http://localhost:8000
 
+
+## Testing with Robo 3T
+
+If now already on your workstation, download and install the open-source MongoDB GUI called **Robo 3T** from https://robomongo.org/
+
+
+
+== MORE HERE ==
+
+
+
+
+
+
+
 Bring down the container before moving on:
 
 ```
