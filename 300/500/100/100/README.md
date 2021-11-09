@@ -288,6 +288,16 @@ Now inside ```mongoInit.js``` replace the following placeholders:
 
 ```mongoInit.js``` is where we'll create our user and database.
 
+The code in this script runs in the Mongo shell, so you’ll notice difference Mongo-specific objects are provided: e.g., ```db```, ```run```, ```cat```.
+
+The first function uses the mongo shell ```run``` command to retrieve environment variables (and I have to credit [this Stack Overflow hack](https://stackoverflow.com/questions/39444467/how-to-pass-environment-variable-to-mongo-script/60192758#60192758) for help. Please let me know if there's a better way to do this).
+
+Then, we create the database with ```db.getSiblingDB```, a user with ```db.createUser```, and a collection with ```db.createCollection```.
+
+Note that this script will only run when the container is initially started and bound to a Docker volume on the host, but not on any subsequent container startups bound to the same volume. This prevents any duplication or data collision when the container is shut down and restarted.
+
+The next step is optional, but I want to also add some seed data so that I can test out the application right away.
+
 Create a subdirectory under ```scripts``` called ```seed```:
 
 ```
