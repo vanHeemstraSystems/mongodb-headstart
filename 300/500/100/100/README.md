@@ -328,6 +328,9 @@ $ cp sample.MOCK_DATA.json MOCK_DATA.json
 
 Now inside ```MOCK_DATA.json``` replace the content with the mock data that suits your database.
 
+***For example***: We’ll download some data that I’ve already generated for the project using [Mockaroo](https://www.mockaroo.com/).
+$ curl https://raw.githubusercontent.com/jsheridanwells/MeanUrls/main/scripts/mongo/seed/MOCK_DATA.json -o ./scripts/mongo/seed/MOCK_DATA.json
+
 Also, inside the ```seed``` directory, create a file called ```mongo_seed.sh```.
 
 ```
