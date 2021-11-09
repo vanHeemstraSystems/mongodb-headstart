@@ -139,3 +139,11 @@ If successful, browse to http://localhost:8000 to see the production version of 
 ![React App Screen Shot](react_app_screen_shot.png)
 
 http://localhost:8000
+
+## Testing with Robo 3T
+
+If now already on your workstation, download and install the open-source MongoDB GUI called **Robo 3T** from https://robomongo.org/
+
+
+
+== MORE HERE ==
