@@ -203,15 +203,69 @@ http://localhost:8000
 
 If not already on your workstation, download and install the open-source MongoDB GUI called **Robo 3T** from https://robomongo.org/
 
+Create (if now already existing) a new connection in Robo 3T, with the following settings:
 
+![Robo 3T Connection String - Connection](robo_3t_connection_string_connection.png)
 
-== MORE HERE ==
+Robo 3T: Connection String - Connection
 
+**Note**: Use the correct URL or IP address for the server your MongoDB Docker Container is hosted on, as well as the port.
 
+Add the login credentials, as set in ```containers/app/.env``` file:
 
+![Robo 3T Connection String - Authentication](robo_3t_connection_string_authentication.png)
 
+Robo 3T: Connection String - Authentication
 
+**Test** the connection by clicking the 'Test' button.
 
+![Robo 3T Connection String - Test Successful](robo_3t_connection_string_test_successful.png)
+
+Robo 3T: Connection String - Test Successful
+
+Save the connection.
+
+![Robo 3T MongoDB - Save Connection](robo_3t_mongodb_connections_save_connection.png)
+
+Robo 3T: Connections
+
+Once connected you will see the user (here: ```mongo_root```), which is the value of ```MONGO_INITDB_ROOT_USERNAME``` set in ```containers/app/.env``` file.
+
+![Robo 3T MongoDB - Database Connected](robo_3t_mongodb_database_connected.png)
+
+Robo 3T: Database connected
+
+## Seeding the database
+
+The next step is optional, but there are times when it is helpful to start the database with some boilerplate data to test the components more authentically, or to see how the application handles a more realistic volume of data. The ```docker exec``` command lets us enter the Docker container from the terminal, navigate the file system on the container, and execute bash commands.
+
+With the container running, execute the following command from the server that hosts the container:
+
+```
+$ docker exec -it mongodb-dev bash
+```
+
+**Note**: ```mongodb-dev``` is the name of the running container.
+
+This will open a bash terminal (in interactive mode, as specified by ```-it```) running inside of the container.
+
+From inside the container, navigate to the directory where the seed scripts (e.g. ```mongo_seed.sh```) were mounted.
+
+```
+inside the container: $ cd /home/mongodb/seed
+```
+
+Run the seed script:
+
+```
+inside the container: $ bash mongo_seed.sh
+```
+
+Your terminal will prompt you with the progress of the seeding of the database.
+
+Inspect the database (for example with Robo 3T) and you should see that the documents as configured in ```MOCK_DATA.json``` have been added to the collection.
+
+To exit the container, type ```exit```.
 
 Bring down the container before moving on:
 
