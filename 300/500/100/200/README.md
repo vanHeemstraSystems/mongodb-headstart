@@ -241,6 +241,16 @@ The next step is optional, but there are times when it is helpful to start the d
 
 With the container running, execute the following command from the server that hosts the container:
 
+Before running ```docker exec```, make sure when on a Linux RHEL server, set enforcing to permissive otherwise you may not have permission to list directory content inside the container, like so:
+
+```
+$ getenforce
+$ Enforcing
+$ sudo setenforce 0
+$ getenforce
+$ Permissive
+```
+
 ```
 $ docker exec -it mongodb-dev bash
 ```
