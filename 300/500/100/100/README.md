@@ -232,6 +232,13 @@ $ cd containers/app/mongodb/scripts/init
 $ touch .dbshell
 ```
 
+**IMPORTANT**: Set the read & write permission for .dbshell to everyone, as follows:
+
+```
+$ cd containers/app/mongodb/scripts/init
+$ chmod o+rw .dbshell
+```
+
 The ```.dbshell``` file is just a blank placeholder file that is used to create a Linux user to run the scripts in the container.
 
 Also, inside the ```init``` directory, create a file called ```sample.mongoInit.js```.
